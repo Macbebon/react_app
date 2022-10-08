@@ -29,7 +29,6 @@ import {
 } from "react-icons/ri";
 
 import { MdAddTask, MdHourglassEmpty, MdOutlineSavings } from "react-icons/md";
-
 /*
 Data
 */
@@ -41,6 +40,7 @@ const data=() =>{
  */
 
 const Home = () => {
+  const [amount, setAmount] = useState(100);
   const [addr, setAddr] = useState();
   const [deposite, setDeposite] = useState(0);
   const [roi, setRoi] = useState(0);
@@ -53,10 +53,15 @@ const Home = () => {
   // what MetaMask injects as window.ethereum into each page
   const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-  const address = "0x7ebC50cAd5D1D32078AccC3C428168Db7E0f2162";
+  const address = "0xaE43cAb9725033cea25a35513EA0e664ad88f44B";
 
   const abi =
-    '[{"inputs":[{"internalType":"contract IERC20","name":"_token","type":"address"},{"internalType":"address","name":"_treasurer","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"investor","type":"address"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Invested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Reward","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"withdrawer","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Withdrawn","type":"event"},{"inputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes32","name":"referral","type":"bytes32"}],"name":"addReferral","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_add","type":"address"},{"internalType":"bool","name":"_blacklist","type":"bool"}],"name":"blacklistUser","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"claim","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint16","name":"index","type":"uint16"}],"name":"dailyCollection","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"myRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"referralLink","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_treasurer","type":"address"}],"name":"setTreasurer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"topup","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"treasurer","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_add","type":"address"}],"name":"userDetails","outputs":[{"internalType":"uint256","name":"deposited","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"uint256","name":"referralReward","type":"uint256"},{"internalType":"uint256","name":"claimed","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"},{"internalType":"address","name":"addr","type":"address"},{"internalType":"bytes32","name":"link","type":"bytes32"},{"internalType":"uint256","name":"referredCount","type":"uint256"},{"internalType":"bytes32","name":"referred","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"withdrawAll","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
+    '[{"inputs":[{"internalType":"contract IERC20","name":"_token","type":"address"},{"internalType":"address","name":"_treasurer","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"investor","type":"address"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Invested","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"user","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"Reward","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"withdrawer","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"timestamp","type":"uint256"}],"name":"Withdrawn","type":"event"},{"inputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes32","name":"referral","type":"bytes32"}],"name":"addReferral","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"blacklist","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_add","type":"address"},{"internalType":"bool","name":"_blacklist","type":"bool"}],"name":"blacklistUser","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"invet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address[]","name":"list","type":"address[]"},{"internalType":"uint256[]","name":"amount","type":"uint256[]"}],"name":"multiWithdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"userAddress","type":"address"}],"name":"myDeposited","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"userAddress","type":"address"}],"name":"myRewards","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"report","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"setThirtyDayRewardPolicy","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"_treasurer","type":"address"}],"name":"setTreasurer","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"thirtyDayRewardPolicy","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"token","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"addr","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"topup","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"treasurer","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"_add","type":"address"}],"name":"userDetails","outputs":[{"internalType":"uint256","name":"deposited","type":"uint256"},{"internalType":"uint256","name":"timestamp","type":"uint256"},{"internalType":"uint256","name":"referralReward","type":"uint256"},{"internalType":"uint256","name":"claimed","type":"uint256"},{"internalType":"uint256","name":"reward","type":"uint256"},{"internalType":"address","name":"addr","type":"address"},{"internalType":"bytes32","name":"link","type":"bytes32"},{"internalType":"uint256","name":"directCount","type":"uint256"},{"internalType":"uint256","name":"referredCount","type":"uint256"},{"internalType":"bytes32","name":"referred","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"}]';
+
+  // const abi = [
+  //   "function myRewards(address userAddress)"
+  // ]
+
   const tokenAbi = [
     // Send some of your tokens to someone else
     "function approve(address delegate, uint256 numTokens)",
@@ -83,21 +88,21 @@ const Home = () => {
     console.log(addr);
     setAddr(addr);
 
-    const userDetails = await contract.userDetails(addr);
-    const amount = userDetails.deposited.toNumber() / 10 ** 10;
-    setDeposite(amount);
-    setRoi(amount * 0.005);
-    setReferralReward(
-      (parseFloat(userDetails.referralReward) / 10 ** 10) * 0.005
-    );
-    setClaimed(userDetails.claimed.toNumber() / 10 ** 10);
-    setReward(
-      (parseFloat(userDetails.referralReward) / 10 ** 10) * 0.005 +
-        amount * 0.005
-    );
-    
-    setReferredCount(userDetails.referredCount.toNumber());
-    // const reff = await contract.referralLink("0x1d95eAbc614834Bf8Fb64d171D5577432187C436");
+    const reward = await contract.myRewards(addr);
+    setReward(reward / 10 ** 18);
+
+    // const decimal = 10;
+
+    let deposite = await contract.myDeposited(addr);
+    //const amount = userDetails.deposited/(10**18);
+    deposite = deposite / 10 ** 18;
+    setDeposite(deposite);
+    setRoi(deposite * 0.005);
+    // setReferralReward(parseFloat(userDetails.referralReward/(10**18))*0.005);
+    // setClaimed(userDetails.claimed/(10**18));
+    // // setReward((userDetails.reward/(10**18)));
+    setReward((deposite.referralReward / 10 ** 18) * 0.005 + amount * 0.005);
+    setReferredCount(deposite.referredCount.toNumber());
 
     // const signerContract = contract.connect(signer);
     // const ref = signerContract.setTreasurer("0x106aa65493c0096d4a777dCA393A4687eF7E8839");
@@ -106,7 +111,6 @@ const Home = () => {
 
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-  /* Deposite Functions */
   function onPopupButton() {
     /* return alert("Button") */
     var amount = prompt("Please enter the deposite amount here", "100");
@@ -115,7 +119,7 @@ const Home = () => {
     /* document.getElementById("").innerHTML =
       "You have entered " + amount + " "; */
     
-    if (amount>=100) {
+    if (amount >= 100) {
       setTimeout(addRef, 2000);
       
     }
@@ -124,52 +128,51 @@ const Home = () => {
       
     }
   }
-
-
-
-  /* End  */
-
   async function addRef() {
-    
-      // MetaMask requires requesting permission to connect users accounts
-      await provider.send("eth_requestAccounts", []);
+    // MetaMask requires requesting permission to connect users accounts
+    await provider.send("eth_requestAccounts", []);
 
-      // The MetaMask plugin also allows signing transactions to
-      // send ether and pay to change state within the blockchain.
-      // For this, you need the account signer...
-      const signer = provider.getSigner();
+    // The MetaMask plugin also allows signing transactions to
+    // send ether and pay to change state within the blockchain.
+    // For this, you need the account signer...
+    const signer = provider.getSigner();
 
-      // const reff = await contract.owner();
-      // console.log("lol: ", reff);
+    // const reff = await contract.owner();
+    // console.log("lol: ", reff);
+    // Each DAI has 18 decimal places
+    const tokenAddress = await contract.token();
+    // const tokens = ethers.utils.parseUnits("100", 10);
+    // Each DAI has 18 decimal places
 
-      // Each DAI has 18 decimal places
-      const tokenAddress = await contract.token();
-      // const tokens = ethers.utils.parseUnits("100", 10);
-      const tokens = 100 * 10 ** 10;
-      console.log(tokens);
-      const tokenContract = new ethers.Contract(
-        tokenAddress,
-        tokenAbi,
-        provider
-      ).connect(signer);
-      await tokenContract.approve(address, tokens);
+    const tokens = ethers.utils.parseUnits(amount, 18);
+    // const tokens = 100*10**18;
+    console.log(tokens);
+    const tokenContract = new ethers.Contract(
+      tokenAddress,
+      tokenAbi,
+      provider
+    ).connect(signer);
+    await tokenContract.approve(address, tokens);
 
-      await sleep(15000);
+    await sleep(15000);
 
-      // const addr = "0xDC09B74bA5618D969979CF3495Ea3Dd14BC94312";
-      let reffAddress = window.location.href.replace(
-        window.location.origin,
-        ""
-      );
-      reffAddress = reffAddress.replace("/", "");
-      if (reffAddress == "") {
-        reffAddress = "0xDC09B74bA5618D969979CF3495Ea3Dd14BC94312";
-      }
-      const reff = await contract.referralLink(reffAddress);
-      const userAddress = await signer.getAddress();
-      const signerContract = contract.connect(signer);
-      await signerContract.addReferral(userAddress, 100, reff);
-    }
+    const userAddress = await signer.getAddress();
+
+    const signerContract = contract.connect(signer);
+    await signerContract.invet(userAddress, amount);
+  }
+
+  // // const addr = "0xDC09B74bA5618D969979CF3495Ea3Dd14BC94312";
+  // let reffAddress = window.location.href.replace(window.location.origin, '');
+  // reffAddress = reffAddress.replace("/", '');
+  // if (reffAddress == '') {
+  //   reffAddress = "0x1d95eAbc614834Bf8Fb64d171D5577432187C436";
+  // }
+  // const reff = await contract.referralLink(reffAddress);
+  // const userAddress = await signer.getAddress();
+  // // console.log(reff);
+  // const signerContract = contract.connect(signer);
+  // await signerContract.addReferral(userAddress, 100, reff);
   
 
   async function topup() {
@@ -184,23 +187,31 @@ const Home = () => {
     // const reff = await contract.owner();
     // console.log("lol: ", reff);
 
-    // Each DAI has 18 decimal places
-    const tokenAddress = await contract.token();
-    // const tokens = ethers.utils.parseUnits("100", 10);
-    const tokens = 100 * 10 ** 10;
-    console.log(tokens);
-    const tokenContract = new ethers.Contract(
-      tokenAddress,
-      tokenAbi,
-      provider
-    ).connect(signer);
-    await tokenContract.approve(address, tokens);
+    if (amount < 100) {
+      alert("enter amout > 100");
+    } else {
+      // Each DAI has 18 decimal places
+      const tokenAddress = await contract.token();
+      // const tokens = ethers.utils.parseUnits("100", 10);
+      // Each DAI has 18 decimal places
 
-    await sleep(15000);
+      const tokens = ethers.utils.parseUnits(amount, 18);
+      // const tokens = 100*10**18;
+      console.log(tokens);
+      const tokenContract = new ethers.Contract(
+        tokenAddress,
+        tokenAbi,
+        provider
+      ).connect(signer);
+      await tokenContract.approve(address, tokens);
 
-    const userAddress = await signer.getAddress();
-    const signerContract = contract.connect(signer);
-    await signerContract.topup(userAddress, 100);
+      await sleep(15000);
+
+      const userAddress = await signer.getAddress();
+
+      const signerContract = contract.connect(signer);
+      await signerContract.topup(userAddress, amount);
+    }
   }
 
   async function withdraw() {
@@ -213,8 +224,9 @@ const Home = () => {
     const signer = provider.getSigner();
 
     const signerContract = contract.connect(signer);
-    await signerContract.claim();
+    await signerContract.withdraw();
   }
+
   return (
     <>
       <header className="header-one">
@@ -254,8 +266,8 @@ const Home = () => {
                         <a href="#">
                           Pages <RiAlignLeft />
                         </a>
-                        </li>
-                       {/*  <ul className="submenu">
+                      </li>
+                      {/*  <ul className="submenu">
                           <li>
                             <a href="user-panel.html">User panel</a>
                           </li>
@@ -656,7 +668,7 @@ const Home = () => {
       <script src="minfile/quantumalert.js"></script>
     </>
   );
-};
+};                                        
 const imageFunction = {
   mainLogo,
   mainAbout,
